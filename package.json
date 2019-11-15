@@ -3,28 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --no-fix",
+    "lint:fix": "vue-cli-service lint",
+    "test": "npm run test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "deploy-production": "REDIRECTOR_API_SECRET=$REDIRECTOR_API_SECRET_PRODUCTION client-deploy-production",
+    "deploy-staging": "REDIRECTOR_API_SECRET=$REDIRECTOR_API_SECRET_STAGING client-deploy-staging",
+    "merge-production": "client-merge"
   },
   "dependencies": {
-    "core-js": "^2.6.5",
-    "vue": "^2.6.10",
-    "vuex": "^3.0.1"
+    "core-js": "3.4.1",
+    "vue": "2.6.10",
+    "vuex": "3.1.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.12.0",
-    "@vue/cli-plugin-e2e-cypress": "^3.12.0",
-    "@vue/cli-plugin-eslint": "^3.12.0",
-    "@vue/cli-plugin-unit-mocha": "^3.12.0",
-    "@vue/cli-service": "^3.12.0",
+    "@emartech/client-publish": "2.2.0",
+    "@vue/cli-plugin-babel": "4.0.5",
+    "@vue/cli-plugin-e2e-cypress": "4.0.5",
+    "@vue/cli-plugin-eslint": "4.0.5",
+    "@vue/cli-plugin-unit-mocha": "4.0.5",
+    "@vue/cli-service": "4.0.5",
     "@vue/test-utils": "1.0.0-beta.29",
-    "babel-eslint": "^10.0.1",
-    "chai": "^4.1.2",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "babel-eslint": "10.0.3",
+    "chai": "4.2.0",
+    "eslint": "6.6.0",
+    "eslint-config-emarsys": "5.1.0",
+    "eslint-plugin-vue": "6.0.1",
+    "vue-template-compiler": "2.6.10"
   }
 }
