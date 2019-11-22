@@ -10,8 +10,8 @@ module.exports = {
   ],
   rules: {
     'no-console': 0,
-    // 'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    // 'no-console': process.env.ENVIRONMENT === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.ENVIRONMENT === 'production' ? 'error' : 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'
@@ -19,7 +19,7 @@ module.exports = {
   overrides: [
     {
       files: [
-        '**/__tests__/*.{j,t}s?(x)'
+        '**/*.spec.{j,t}s?(x)'
       ],
       env: {
         mocha: true
