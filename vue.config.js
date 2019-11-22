@@ -13,6 +13,7 @@ module.exports = {
       new webpack.DefinePlugin({
         'process.env': {
           SERVICE_URL: JSON.stringify(process.env.SERVICE_URL || 'http://localhost:9222'),
+          SERVICE_NAME: JSON.stringify(process.env.SERVICE_NAME || 'example'),
           SUITE_URL: JSON.stringify(process.env.SUITE_URL || 'http://suitedocker.ett.local')
         }
       })
