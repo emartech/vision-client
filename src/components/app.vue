@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import ContactFieldList from './contact-field-list.vue';
+import ContactFieldList from './contact-field-list/contact-field-list.vue';
 import { mapState, mapActions } from 'vuex';
 
 export default {

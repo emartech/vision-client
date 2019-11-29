@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ContactFieldList from '@/components/contact-field-list.vue';
+import ContactFieldList from './contact-field-list.vue';
 
 describe('ContactFieldList', () => {
   it('should render datagrid', () => {
