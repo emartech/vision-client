@@ -1,6 +1,6 @@
 export const actions = {
   onLoad: ({ commit }) => commit(
-    'LOAD',
+    'load',
     {
       contactFields: [
         { id: 1, name: 'First Name', application_type: 'text' },

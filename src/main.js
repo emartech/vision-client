@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import App from './components/app.vue';
-import { storeFactory } from './store';
+import { storeFactory } from './store/store';
 import { loggerFactory } from './logger';
 
 Vue.use(Vuex);
