@@ -1,0 +1,13 @@
+version: "3.4"
+
+services:
+  client:
+    image: node:12
+    working_dir: /app
+    environment:
+      - NPM_TOKEN=${NPM_TOKEN}
+    volumes:
+      - ./:/app:delegated
+    ports:
+      - 8080:8080
+    command: npm start
