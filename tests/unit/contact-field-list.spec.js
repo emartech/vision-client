@@ -3,12 +3,12 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ContactFieldList from '@/components/contact-field-list.vue';
 
 describe('ContactFieldList', () => {
-  it('renders props.msg when passed', () => {
+  it('should render datagrid', () => {
     const contactFields = [];
     const wrapper = shallowMount(ContactFieldList, {
       propsData: { contactFields }, localVue: createLocalVue()
     });
 
-    expect(wrapper.find('section').html()).to.include('section');
+    expect(wrapper.find('e-datagrid').html()).to.include('e-datagrid');
   });
 });
