@@ -6,16 +6,14 @@ import { config } from '../config';
 
 const baseState = { contactFields: [], loading: true };
 
-export const storeBaseFactory = (config = {}, authToken = '') => {
+export const storeFactory = (config = {}, authToken = '') => {
   const state = { ...baseState, ...config, authToken };
   return new Vuex.Store({ state, actions, mutations, getters });
 };
 
-export const storeFactory = emarsys => {
-  return Promise
-    .all([
-      emarsys.utils.getConfig(),
-      emarsys.utils.getAuthenticationToken(config.serviceName)
-    ])
-    .then(([config, authToken]) => storeBaseFactory(config, authToken));
-};
+export const getConfigs = emarsys => Promise
+  .all([
+    emarsys.utils.getConfig(),
+    emarsys.utils.getAuthenticationToken(config.serviceName),
+    emarsys.utils.getTranslation(config.serviceName)
+  ]);

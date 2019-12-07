@@ -70,3 +70,14 @@ In `vue.config.js` you can set the client service's name which will be stored in
 
 The authentication secret can be added in EMSadmin under Integrations/Frontend Tokens. 
 The secret must be the same as the one stored on the server where the client application sends the requests.
+
+### Permissions
+
+For Suite pages the permission handling happens in `include/classes/permission/requestmap.class.php`.
+You have to add your page where the client application is diplayed.
+
+### Translations
+
+Default translations reside in `src/translation/default.json`. 
+The translation file is mirrored into Suite under `translation/[service name].php`, 
+this is where the localized strings will come from.
