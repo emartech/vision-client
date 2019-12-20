@@ -1,14 +1,11 @@
 import { expect } from 'chai';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ContactFieldList from './contact-field-list.vue';
+import { createComponent } from '../../test-util';
 
 describe('ContactFieldList', () => {
   it('should render datagrid', () => {
-    const contactFields = [];
-    const wrapper = shallowMount(ContactFieldList, {
-      propsData: { contactFields }, localVue: createLocalVue()
-    });
+    const { component } = createComponent(ContactFieldList);
 
-    expect(wrapper.find('e-datagrid').html()).to.include('e-datagrid');
+    expect(component.find('e-datagrid').html()).to.include('e-datagrid');
   });
 });

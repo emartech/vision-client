@@ -9,12 +9,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'ContactFieldList',
-  props: {
-    contactFields: Array
-  },
   computed: {
+    ...mapState(['contactFields']),
     dataGridInput() {
       return JSON.stringify(this.contactFields);
     }
