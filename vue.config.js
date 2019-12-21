@@ -11,8 +11,9 @@ module.exports = {
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
-          SERVICE_NAME: JSON.stringify(process.env.SERVICE_NAME || 'example'),
-          SERVICE_URL: JSON.stringify(process.env.SERVICE_URL || 'http://localhost:9222')
+          SERVICE_NAME: JSON.stringify(process.env.SERVICE_NAME || 'personalization-editor'),
+          SERVICE_URL: JSON.stringify(process.env.SERVICE_URL || 'http://localhost:9222'),
+          TRANSLATION_NAME: JSON.stringify(process.env.TRANSLATION_NAME || 'example')
         }
       })
     ]
