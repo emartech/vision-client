@@ -1,22 +1,33 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { actions } from './index';
+import { Api } from '../../lib/api/api';
 
-describe('Actions', function() {
-  it('onLoad should trigger load mutation with contact fields', function() {
-    const state = { commit: sinon.stub() };
+const setupStore = () => {
+  const store = { commit: sinon.stub(), state: { customerId: 1 } };
+  const getContactFieldsStub = sinon.stub(Api.prototype, 'getContactFields');
 
-    actions.onLoad(state);
+  return { store, getContactFieldsStub };
+};
 
-    expect(state.commit).to.have.been.calledWith(
-      'load',
-      {
-        contactFields: [
-          { id: 1, name: 'First Name', application_type: 'text' },
-          { id: 2, name: 'Last Name', application_type: 'text' },
-          { id: 3, name: 'Email', application_type: 'text' }
-        ]
-      }
-    );
+describe('Actions', () => {
+  describe('#onLoad', () => {
+    it('should trigger load mutation with contact fields', async () => {
+      const { store, getContactFieldsStub } = setupStore();
+      getContactFieldsStub.resolves([
+        { id: 3, name: 'Email', application_type: 'longtext' }
+      ]);
+
+      await actions.onLoad(store);
+
+      expect(store.commit).to.have.been.calledWith(
+        'load',
+        {
+          contactFields: [
+            { id: 3, name: 'Email', application_type: 'longtext' }
+          ]
+        }
+      );
+    });
   });
 });

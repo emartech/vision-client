@@ -1,30 +1,37 @@
 import { expect } from 'chai';
 import { createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
+import sinon from 'sinon';
 import { storeFactory } from './index';
+import { Api } from '../lib/api/api';
 
-describe('Store', function() {
-  beforeEach(function() {
-    createLocalVue().use(Vuex);
-  });
+const setupRealStore = () => {
+  createLocalVue().use(Vuex);
+  const store = storeFactory();
+  const getContactFieldsStub = sinon.stub(Api.prototype, 'getContactFields');
 
-  it('should create empty store', function() {
-    const store = storeFactory();
+  return { store, getContactFieldsStub };
+};
+
+describe('Store', () => {
+  it('should create empty store', () => {
+    const { store } = setupRealStore();
 
     expect(store.state.loading).to.eql(true);
     expect(store.state.contactFields).to.eql([]);
   });
 
-  it('should trigger load event and set up state', function() {
-    const store = storeFactory();
+  it('should trigger load event and set up state', async () => {
+    const { store, getContactFieldsStub } = setupRealStore();
+    getContactFieldsStub.resolves([
+      { id: 3, name: 'Email', application_type: 'longtext' }
+    ]);
 
-    store.dispatch('onLoad');
+    await store.dispatch('onLoad');
 
     expect(store.state.loading).to.eql(false);
     expect(store.state.contactFields).to.eql([
-      { id: 1, name: 'First Name', application_type: 'text' },
-      { id: 2, name: 'Last Name', application_type: 'text' },
-      { id: 3, name: 'Email', application_type: 'text' }
+      { id: 3, name: 'Email', application_type: 'longtext' }
     ]);
   });
 });
