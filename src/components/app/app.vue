@@ -26,7 +26,7 @@ export default {
     ...mapActions(['onLoad'])
   },
   mounted() {
-    window.setTimeout(() => this.onLoad(), 1000);
+    this.onLoad();
   }
 };
 </script>

@@ -24,5 +24,6 @@ module.exports = {
     extract: {
       filename: '[name].css'
     }
-  }
+  },
+  lintOnSave: false
 };

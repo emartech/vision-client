@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { storeFactory } from './index';
 import { Api } from '../lib/api/api';
 
-const setupRealStore = () => {
+const setupStore = () => {
   createLocalVue().use(Vuex);
   const store = storeFactory();
   const getContactFieldsStub = sinon.stub(Api.prototype, 'getContactFields');
@@ -15,14 +15,14 @@ const setupRealStore = () => {
 
 describe('Store', () => {
   it('should create empty store', () => {
-    const { store } = setupRealStore();
+    const { store } = setupStore();
 
     expect(store.state.loading).to.eql(true);
     expect(store.state.contactFields).to.eql([]);
   });
 
   it('should trigger load event and set up state', async () => {
-    const { store, getContactFieldsStub } = setupRealStore();
+    const { store, getContactFieldsStub } = setupStore();
     getContactFieldsStub.resolves([
       { id: 3, name: 'Email', application_type: 'longtext' }
     ]);

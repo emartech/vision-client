@@ -2,6 +2,7 @@ import axios from 'axios';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import { Api } from './api';
+import { stubLogger } from '../../test-util';
 
 const createApi = customerId => {
   const contactFields = [
@@ -10,7 +11,7 @@ const createApi = customerId => {
   const api = new Api(customerId);
   const axiosGet = sinon.stub(axios, 'get');
 
-  return { api, contactFields, axiosGet };
+  return { api, contactFields, axiosGet, ...stubLogger() };
 };
 
 describe('Api', () => {
@@ -26,6 +27,33 @@ describe('Api', () => {
       const result = await api.getContactFields();
 
       expect(result).to.eql(contactFields);
+    });
+
+    it('should log request', async () => {
+      const { api, contactFields, axiosGet, loggerInfo } = createApi(1);
+      axiosGet.resolves({
+        data: {
+          general: contactFields
+        }
+      });
+
+      await api.getContactFields();
+
+      expect(loggerInfo).to.have.been.calledWith('get_contact_fields');
+    });
+
+    it('should log request failure', async () => {
+      const { api, axiosGet, loggerFromError } = createApi(1);
+      const error = new Error('request failed');
+      axiosGet.rejects(error);
+
+      try {
+        await api.getContactFields();
+        throw new Error('should throw');
+      } catch (e) {
+        expect(e.message).to.eql('request failed');
+        expect(loggerFromError).to.have.been.calledWith('get_contact_fields', error);
+      }
     });
 
     it('should call proper endpoint', async () => {
