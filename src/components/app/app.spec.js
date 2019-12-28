@@ -12,4 +12,20 @@ describe('App', () => {
 
     expect(Api.prototype.getContactFields).to.have.been.calledWith();
   });
+
+  it('should translate header', () => {
+    sinon.stub(Api.prototype, 'getContactFields').resolves([]);
+
+    const { component } = createComponent(App);
+
+    expect(component.find('h1').text()).to.eql('Overview');
+  });
+
+  it('should modify header based on flipper', () => {
+    sinon.stub(Api.prototype, 'getContactFields').resolves([]);
+
+    const { component } = createComponent(App, { state: { flippers: ['ui_redesign_basics'] } });
+
+    expect(component.find('h1').text()).to.eql('Overview _redesigned');
+  });
 });

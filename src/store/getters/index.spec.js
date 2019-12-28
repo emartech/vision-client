@@ -2,13 +2,39 @@ import { expect } from 'chai';
 import { getters } from './index';
 
 describe('Getters', () => {
-  describe('#contactFieldsCount', () => {
-    it('contactFieldsCount should return number of contact fields', () => {
-      const state = { contactFields: [] };
+  describe('#flipperOn', () => {
+    it('should return true for set flipper', () => {
+      const state = { flippers: ['ui_redesign_basics'] };
 
-      const count = getters.contactFieldsCount(state);
+      const flipperOn = getters.flipperOn(state);
 
-      expect(count).to.eql(0);
+      expect(flipperOn('ui_redesign_basics')).to.eql(true);
+    });
+
+    it('should return false for not set flipper', () => {
+      const state = { flippers: ['ui_redesign_basics'] };
+
+      const flipperOn = getters.flipperOn(state);
+
+      expect(flipperOn('ui_redesign_invalid')).to.eql(false);
+    });
+  });
+
+  describe('#flipperOff', () => {
+    it('should return true for set flipper', () => {
+      const state = { flippers: ['ui_redesign_basics'] };
+
+      const flipperOff = getters.flipperOff(state);
+
+      expect(flipperOff('ui_redesign_basics')).to.eql(false);
+    });
+
+    it('should return false for not set flipper', () => {
+      const state = { flippers: ['ui_redesign_basics'] };
+
+      const flipperOff = getters.flipperOff(state);
+
+      expect(flipperOff('ui_redesign_invalid')).to.eql(true);
     });
   });
 });

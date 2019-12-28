@@ -1,3 +1,4 @@
 export const getters = {
-  contactFieldsCount: state => state.contactFields.length
+  flipperOn: state => flipper => state.flippers.includes(flipper),
+  flipperOff: state => flipper => !state.flippers.includes(flipper)
 };

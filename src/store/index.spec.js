@@ -19,6 +19,7 @@ describe('Store', () => {
 
     expect(store.state.loading).to.eql(true);
     expect(store.state.contactFields).to.eql([]);
+    expect(store.state.flippers).to.eql([]);
   });
 
   it('should trigger load event and set up state', async () => {

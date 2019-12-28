@@ -1,7 +1,10 @@
 <template>
   <div class="e-layout">
     <header class="e-layout__header">
-      <h1 class="e-layout__title">{{ $t('overview.title') }}</h1>
+      <h1 class="e-layout__title">
+        {{ $t('overview.title') }}
+        <span v-if="flipperOn('ui_redesign_basics')">_redesigned</span>
+      </h1>
     </header>
     <main class="e-layout__content">
       <section class="e-layout__section">
@@ -15,12 +18,13 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'app',
   computed: {
-    ...mapState(['loading'])
+    ...mapState(['loading']),
+    ...mapGetters(['flipperOn'])
   },
   methods: {
     ...mapActions(['onLoad'])

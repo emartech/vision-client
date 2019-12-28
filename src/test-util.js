@@ -8,17 +8,20 @@ import { storeFactory } from './store';
 import { routerFactory } from './router';
 import { translationFactory } from './translation';
 
-export const createComponent = (ComponentClass, options = { shallow: true }) => {
+export const createComponent = (
+  ComponentClass,
+  { shallow = true, state = {} } = { shallow: true, state: {} }
+) => {
   const localVue = createLocalVue();
   localVue.use(Vuex);
   localVue.use(VueRouter);
   localVue.use(VueI18n);
 
-  const store = storeFactory();
+  const store = storeFactory(state);
   const router = routerFactory();
   const i18n = translationFactory({ language: 'en' }, {});
 
-  const component = options.shallow ?
+  const component = shallow ?
     shallowMount(ComponentClass, { localVue, store, router, i18n }) :
     mount(ComponentClass, { localVue, store, router, i18n });
 
