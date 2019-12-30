@@ -30,19 +30,6 @@ describe('configFactory', () => {
     expect(translation).to.eql({ en: { title: 'Title' } });
   });
 
-  it('should call ui kit with proper parameters', async () => {
-    const { emarsys, getConfig, getAuthenticationToken, getTranslation } = createEmarsys();
-    getConfig.resolves({ customerId: 1, language: 'en' });
-    getAuthenticationToken.resolves('secret');
-    getTranslation.resolves({ en: { title: 'Title' } });
-
-    await configFactory(emarsys);
-
-    expect(getConfig).to.have.been.calledWith();
-    expect(getAuthenticationToken).to.have.been.calledWith('personalization-editor');
-    expect(getTranslation).to.have.been.calledWith('example');
-  });
-
   it('should return empty translation on failure', async () => {
     const { emarsys, getConfig, getAuthenticationToken, getTranslation } = createEmarsys();
     getConfig.resolves({ customerId: 1, language: 'en' });
@@ -70,5 +57,18 @@ describe('configFactory', () => {
 
     expect(consoleWarn).to.have.been.calledWith('Failed to get translation: example', error);
     expect(loggerFromError).to.have.been.calledWith('translation', error);
+  });
+
+  it('should call ui kit with proper parameters', async () => {
+    const { emarsys, getConfig, getAuthenticationToken, getTranslation } = createEmarsys();
+    getConfig.resolves({ customerId: 1, language: 'en' });
+    getAuthenticationToken.resolves('secret');
+    getTranslation.resolves({ en: { title: 'Title' } });
+
+    await configFactory(emarsys);
+
+    expect(getConfig).to.have.been.calledWith();
+    expect(getAuthenticationToken).to.have.been.calledWith('personalization-editor');
+    expect(getTranslation).to.have.been.calledWith('example');
   });
 });
