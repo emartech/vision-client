@@ -8,5 +8,12 @@
       "edit": "Edit",
       "delete": "Delete"
     }
+  },
+  "edit": {
+    "title": "Field",
+    "preview": "Preview"
+  },
+  "header": {
+    "back": "Go to Overview"
   }
 }
